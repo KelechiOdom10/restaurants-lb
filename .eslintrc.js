@@ -1,6 +1,7 @@
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
   extends: ["plugin:astro/recommended", "@unocss", "prettier"],
-  plugins: ["unused-imports", "prettier"],
+  plugins: ["unused-imports", "jsx-a11y", "prettier"],
   overrides: [
     {
       // Define the configuration for `.astro` file.
@@ -15,7 +16,7 @@ module.exports = {
       },
       rules: {
         // override/add rules settings here, such as:
-        // "astro/no-set-html-directive": "error",
+        "astro/no-set-html-directive": "error",
       },
     },
     {
