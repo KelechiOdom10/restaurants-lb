@@ -17,5 +17,6 @@
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "typescript.inlayHints.parameterNames.enabled": "all"
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "class:list"]
 }

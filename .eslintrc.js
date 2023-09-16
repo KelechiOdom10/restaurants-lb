@@ -1,6 +1,6 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["plugin:astro/recommended", "@unocss", "prettier"],
+  extends: ["plugin:astro/recommended", "plugin:tailwindcss/recommended"],
   plugins: ["unused-imports", "jsx-a11y", "prettier"],
   overrides: [
     {
@@ -16,7 +16,8 @@ module.exports = {
       },
       rules: {
         // override/add rules settings here, such as:
-        "astro/no-set-html-directive": "error",
+        // "astro/no-set-html-directive": "error",
+        "tailwindcss/no-custom-classname": "off",
       },
     },
     {
@@ -77,6 +78,12 @@ module.exports = {
         ],
         "no-console": "warn",
       },
+    },
+    {
+      // Define the configuration for `<script>` tag.
+      // Script in `<script>` is assigned a virtual file name with the `.js` extension.
+      files: ["**/*.astro/*.js", "*.astro/*.js"],
+      parser: "@typescript-eslint/parser",
     },
   ],
 };
