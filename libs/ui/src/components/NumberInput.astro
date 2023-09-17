@@ -1,0 +1,98 @@
+---
+import type { HTMLAttributes } from "astro/types";
+interface Props {
+  defaultValue?: number;
+  className?: string;
+  inputProps?: HTMLAttributes<"input">;
+}
+
+const { defaultValue = 1, className, inputProps } = Astro.props;
+---
+
+<div class:list={["product-quantity-input h-12", className]}>
+  <div
+    class="relative mt-1 flex h-12 w-full flex-row overflow-hidden rounded-full bg-gray-100"
+  >
+    <button
+      data-action="decrement"
+      class="h-full w-20 cursor-pointer rounded-l text-gray-600 outline-none"
+    >
+      <span class="m-4 text-2xl font-thin">−</span>
+    </button>
+    <input
+      type="number"
+      class="md:text-basecursor-default flex w-full justify-center border-none bg-transparent text-center text-base font-medium leading-normal text-gray-800 outline-none focus:text-black focus:outline-none"
+      name="product-quantity-input"
+      value={defaultValue}
+      min="1"
+      disabled
+      {...inputProps}
+    />
+    <button
+      data-action="increment"
+      class="h-full w-20 cursor-pointer rounded-r text-gray-600"
+    >
+      <span class="m-4 text-2xl font-thin">+</span>
+    </button>
+  </div>
+
+  <style>
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .product-quantity-input input:focus {
+      outline: none !important;
+    }
+
+    .product-quantity-input button:focus {
+      outline: none !important;
+    }
+  </style>
+
+  <script>
+    function decrement(e) {
+      const btn = e.target.parentNode.parentElement.querySelector(
+        'button[data-action="decrement"]'
+      );
+      const target = btn.nextElementSibling;
+      let value = Number(target.value);
+      value--;
+      if (value < 1) {
+        value = 1;
+      }
+      target.value = value;
+    }
+
+    function increment(e) {
+      const btn = e.target.parentNode.parentElement.querySelector(
+        'button[data-action="decrement"]'
+      );
+      const target = btn.nextElementSibling;
+      let value = Number(target.value);
+      value++;
+      if (value > 50) {
+        value = 50;
+      }
+      target.value = value;
+    }
+
+    const decrementButtons = document.querySelectorAll(
+      `button[data-action="decrement"]`
+    );
+
+    const incrementButtons = document.querySelectorAll(
+      `button[data-action="increment"]`
+    );
+
+    decrementButtons.forEach((btn) => {
+      btn.addEventListener("click", decrement);
+    });
+
+    incrementButtons.forEach((btn) => {
+      btn.addEventListener("click", increment);
+    });
+  </script>
+</div>

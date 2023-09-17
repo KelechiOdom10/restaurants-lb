@@ -1,0 +1,42 @@
+---
+import ProductCard from "./ProductCard.astro";
+interface Props {
+  products: Array<{
+    id: string;
+    name: string;
+    category: string;
+    description: string;
+    price: number;
+    image: string;
+  }>;
+}
+
+const { products } = Astro.props;
+---
+
+<section
+  class="mx-auto grid w-full max-w-8xl grid-cols-1 gap-7 p-8 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:px-0"
+>
+  {products.map((product) => <ProductCard product={product} />)}
+</section>
+
+<script>
+  import { Modal } from "flowbite";
+
+  const articles = document.querySelectorAll(".product-card");
+
+  articles.forEach((article) => {
+    const productModalToggleId = article.getAttribute("data-modal-toggle");
+    if (productModalToggleId) {
+      const modalElement: HTMLElement | null = document.querySelector(
+        `#${productModalToggleId}`
+      );
+
+      const modal = new Modal(modalElement);
+
+      article.addEventListener("click", () => {
+        modal.hide();
+      });
+    }
+  });
+</script>
