@@ -2,15 +2,19 @@
 import { CartIcon, SearchInput } from "../components";
 ---
 
-<header class="sticky inset-x-0 top-0 bg-white px-8 py-4 shadow">
-  <nav class="mx-auto flex w-full max-w-8xl items-center justify-between">
+<header class="sticky inset-x-0 top-0 bg-white px-8 py-4 shadow-none md:shadow">
+  <nav
+    class="mx-auto flex w-full max-w-8xl flex-wrap items-center justify-between"
+  >
     <!-- Logo -->
     <a href="/" class="flex items-center">
       <slot />
     </a>
 
     <!-- search -->
-    <SearchInput className="hidden w-[27.5rem] md:block" />
+    <SearchInput
+      className="order-3 mt-4 w-full md:order-none md:mt-0 md:flex md:w-[27.5rem]"
+    />
 
     <!-- cart icon -->
     <CartIcon />

@@ -7,20 +7,24 @@ const { categories } = Astro.props;
 ---
 
 <section
-  class="mx-auto flex w-full max-w-8xl flex-nowrap items-center justify-start space-x-4 overflow-x-auto px-8 pb-8 pt-16 md:justify-center"
+  class="sticky inset-0 top-[121px] z-10 w-full bg-white px-8 py-4 shadow md:static md:pt-16 md:shadow-none"
 >
-  {
-    categories.map((category, i) => {
-      return (
-        <Pill
-          data-filter-id={`category-filter-${i}`}
-          className="category-filter"
-        >
-          {category}
-        </Pill>
-      );
-    })
-  }
+  <div
+    class="mx-auto flex max-w-8xl flex-nowrap items-center justify-start space-x-4 overflow-x-auto md:justify-center"
+  >
+    {
+      categories.map((category, i) => {
+        return (
+          <Pill
+            data-filter-id={`category-filter-${i}`}
+            className="category-filter"
+          >
+            {category}
+          </Pill>
+        );
+      })
+    }
+  </div>
 </section>
 
 <script>
