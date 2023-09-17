@@ -1,106 +1,138 @@
 ---
-import { Button } from "@restaurants-lb/ui";
+import {
+  ProductList,
+  Navbar,
+  CategoriesFilter,
+  CartDrawer,
+} from "@restaurants-lb/ui";
 
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Welcome to Astro.">
-  <main class="p-8">
-    <h3 class="text-red-700">Day 1</h3>
-
-    <!-- Modal toggle -->
-    <Button id="button" data-modal-toggle="toggle-modal">Toggle modal</Button>
-
-    <!-- Main modal -->
-    <div
-      id="toggle-modal"
-      tabindex="-1"
-      aria-hidden="true"
-      class="fixed inset-x-0 bottom-0 z-50 hidden h-1/2 max-h-full w-full overflow-y-auto overflow-x-hidden p-0 md:inset-0 md:h-[calc(100%-1rem)] md:p-4"
-    >
-      <div class="relative max-h-full w-full max-w-2xl">
-        <!-- Modal content -->
-        <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
-          <!-- Modal header -->
-          <div
-            class="flex items-start justify-between rounded-t border-b p-4 dark:border-gray-600"
-          >
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Terms of Service
-            </h3>
-            <button
-              type="button"
-              class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
-              data-modal-hide="toggle-modal"
-            >
-              <svg
-                aria-hidden="true"
-                class="h-5 w-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-                ><path
-                  fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path></svg
-              >
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <!-- Modal body -->
-          <div class="space-y-6 p-6">
-            <p
-              class="text-base leading-relaxed text-gray-500 dark:text-gray-400"
-            >
-              With less than a month to go before the European Union enacts new
-              consumer privacy laws for its citizens, companies around the world
-              are updating their terms of service agreements to comply.
-            </p>
-            <p
-              class="text-base leading-relaxed text-gray-500 dark:text-gray-400"
-            >
-              The European Union’s General Data Protection Regulation (G.D.P.R.)
-              goes into effect on May 25 and is meant to ensure a common set of
-              data rights in the European Union. It requires organizations to
-              notify users as soon as possible of high-risk data breaches that
-              could personally affect them.
-            </p>
-          </div>
-          <!-- Modal footer -->
-          <div
-            class="flex items-center space-x-2 rounded-b border-t border-gray-200 p-6 dark:border-gray-600"
-          >
-            <button
-              data-modal-hide="toggle-modal"
-              type="button"
-              class="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >I accept</button
-            >
-            <button
-              data-modal-hide="toggle-modal"
-              type="button"
-              class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-600"
-              >Decline</button
-            >
-          </div>
-        </div>
-      </div>
-    </div>
+  <main class="relative">
+    <Navbar>
+      <img
+        src="/images/city-subs-logo.png"
+        alt="City Subs Logo"
+        class="h-8 w-auto sm:h-10"
+      />
+    </Navbar>
+    <CategoriesFilter
+      categories={[
+        "All Categories",
+        "Classic sub",
+        "Premium sub",
+        "Salads",
+        "Burgers",
+        "Sides",
+        "Drinks",
+      ]}
+    />
+    <ProductList
+      products={[
+        {
+          id: "1",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+        {
+          id: "2",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+        {
+          id: "3",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+        {
+          id: "4",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+        {
+          id: "5",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+        {
+          id: "6",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+        {
+          id: "7",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+        {
+          id: "8",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+        {
+          id: "9",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+        {
+          id: "10",
+          name: "Chicken quesadillas",
+          category: "Classic sub",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed",
+          price: 3500,
+          image:
+            "https://hips.hearstapps.com/hmg-prod/images/chicken-quesadilla-index-64515c8e98e28.jpg?crop=0.565xw:1.00xh;0.181xw,0&resize=1200:*",
+        },
+      ]}
+    />
+    <CartDrawer />
   </main>
 </Layout>
-
-<script>
-  import { Modal } from "flowbite";
-  // select the two elements that we'll work with
-  const buttonElement: HTMLElement | null = document.querySelector("#button");
-  const modalElement: HTMLElement | null =
-    document.querySelector("#toggle-modal");
-
-  // create a new modal component
-  const modal = new Modal(modalElement);
-
-  // toggle the visibility of the modal when clicking on the button
-  if (buttonElement) {
-    buttonElement.addEventListener("click", () => modal.hide());
-  }
-</script>
