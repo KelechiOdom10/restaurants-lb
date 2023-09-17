@@ -1,0 +1,49 @@
+---
+interface Props {
+  placeholder?: string;
+  className?: string;
+}
+
+const { placeholder = "Search for meal...", className } = Astro.props;
+---
+
+<div class:list={["relative", className]}>
+  <div
+    class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5"
+  >
+    <svg
+      width="21"
+      height="20"
+      viewBox="0 0 21 20"
+      fill="none"
+      class="h-5 w-5 text-slate-200"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="vuesax/linear/search-normal">
+        <g id="search-normal">
+          <path
+            id="Vector"
+            d="M10.4185 17.4998C14.7908 17.4998 18.3352 13.9554 18.3352 9.58317C18.3352 5.21092 14.7908 1.6665 10.4185 1.6665C6.04628 1.6665 2.50187 5.21092 2.50187 9.58317C2.50187 13.9554 6.04628 17.4998 10.4185 17.4998Z"
+            stroke="#7E8494"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <path
+            id="Vector_2"
+            d="M19.1685 18.3332L17.5019 16.6665"
+            stroke="#7E8494"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <input
+    type="text"
+    class:list={[
+      "block w-full rounded-full border border-slate-200 bg-gray-50 p-2.5 pl-10 text-gray-600 text-sm font-normal  shadow focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50",
+    ]}
+    placeholder={placeholder}
+  />
+</div>
