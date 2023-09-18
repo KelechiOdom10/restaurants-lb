@@ -26,14 +26,21 @@
   </svg>
   <span class="sr-only">Cart Icon with total</span>
   <div
+    id="cart-icon-total"
     class="absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-red-500 text-xs font-bold text-white"
   >
-    8
+    0
   </div>
 </button>
 
 <script>
   import { Drawer } from "flowbite";
+  import { totalQuantity } from "../stores";
+
+  const cartIconTotal = document.querySelector(
+    "#cart-icon-total"
+  ) as HTMLElement;
+  cartIconTotal.innerHTML = totalQuantity.get().toString();
 
   const drawerElement = document.querySelector(
     "#drawer-cart-checkout"
@@ -48,6 +55,8 @@
     const drawer = new Drawer(drawerElement, {
       placement: "right",
       onHide(drawer) {
+        const backdrop = document.querySelector("[drawer-backdrop]");
+        backdrop?.remove();
         drawer._targetEl.classList.add("hidden");
       },
       onShow(drawer) {

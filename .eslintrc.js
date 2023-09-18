@@ -2,6 +2,10 @@
 module.exports = {
   extends: ["plugin:astro/recommended", "plugin:tailwindcss/recommended"],
   plugins: ["unused-imports", "jsx-a11y", "prettier"],
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
   overrides: [
     {
       // Define the configuration for `.astro` file.
@@ -21,20 +25,18 @@ module.exports = {
       },
     },
     {
-      files: ["*.ts", "*.js", "*.mjs", "*.cjs"],
-      parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-      },
+      files: ["*.mjs", "*.cjs"],
+      parser: "@typescript-eslint/parser",
       rules: {
         "import/prefer-default-export": "off",
       },
     },
     {
       files: ["*.ts", "*.tsx", "*.js", "*.jsx", "!*.stories.tsx"],
+      extends: ["plugin:@typescript-eslint/recommended"],
       plugins: ["unused-imports", "import"],
+      parser: "@typescript-eslint/parser",
       rules: {
-        "react/react-in-jsx-scope": "off",
         "unused-imports/no-unused-imports": "error",
         "import/order": [
           1,

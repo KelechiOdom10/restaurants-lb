@@ -1,6 +1,7 @@
 ---
 import Button from "./Button.astro";
-import NumberInput from "./NumberInput.astro";
+import { NumberInput } from "./NumberInput";
+
 type Props = {
   product: {
     id: string;
@@ -35,7 +36,6 @@ const { product } = Astro.props;
   id={`toggle-modal-${product.id}`}
   tabindex="-1"
   aria-hidden="true"
-  data-modal-placement="bottom-center"
   class="fixed inset-x-0 bottom-0 z-50 hidden w-full md:inset-0 md:h-[calc(100%-1rem)] md:p-4"
 >
   <!-- Modal content -->
@@ -94,8 +94,16 @@ const { product } = Astro.props;
 
     <!-- Modal footer -->
     <footer class="grid grid-cols-2 gap-4 px-4 pb-8 pt-6">
-      <NumberInput />
-      <Button data-modal-hide={`toggle-modal-${product.id}`} fullWidth>
+      <NumberInput client:load />
+      <Button
+        data-modal-hide={`toggle-modal-${product.id}`}
+        fullWidth
+        className="add-to-cart"
+        data-product-id={product.id}
+        data-product-name={product.name}
+        data-product-image={product.image}
+        data-product-price={product.price}
+      >
         Add to cart
       </Button>
     </footer>

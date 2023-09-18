@@ -10,15 +10,21 @@
   },
   "private": true,
   "dependencies": {
+    "@astrojs/preact": "^3.0.0",
     "@astrojs/tailwind": "^5.0.0",
+    "@nanostores/persistent": "^0.9.1",
+    "@nanostores/preact": "^0.5.0",
     "@nxtensions/astro": "16.2.0",
     "flowbite": "^1.8.1",
+    "nanostores": "^0.9.3",
+    "preact": "^10.17.1",
     "tailwindcss": "^3.3.3"
   },
   "devDependencies": {
     "@nx/js": "16.8.1",
     "@nx/workspace": "16.8.1",
     "@types/eslint": "^8.44.2",
+    "@types/node": "^20.6.2",
     "@typescript-eslint/parser": "^6.6.0",
     "astro": "^2.10.15",
     "eslint": "^8.49.0",
