@@ -21,22 +21,46 @@ const { products } = Astro.props;
 </section>
 
 <script>
-  import { Modal } from "flowbite";
+  import {
+    addToCart,
+    isAddingToCart,
+    subscribeToShoppingCartChange,
+  } from "../stores";
 
-  const articles = document.querySelectorAll(".product-card");
+  document.addEventListener("DOMContentLoaded", () => {
+    const productCardButtons = document.querySelectorAll(".add-to-cart");
 
-  articles.forEach((article) => {
-    const productModalToggleId = article.getAttribute("data-modal-toggle");
-    if (productModalToggleId) {
-      const modalElement: HTMLElement | null = document.querySelector(
-        `#${productModalToggleId}`
-      );
+    productCardButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const input = button.parentElement?.querySelector(
+          'input[name="product-quantity-input"]'
+        ) as HTMLInputElement;
+        // Extract the product information from the button's data attribute
+        const productId = button.getAttribute("data-product-id") ?? "";
+        const productName = button.getAttribute("data-product-name") ?? "";
+        const productImage = button.getAttribute("data-product-image") ?? "";
+        const productPrice = parseInt(
+          button.getAttribute("data-product-price") ?? "0"
+        );
+        const quantity = parseInt(input?.value ?? "1");
 
-      const modal = new Modal(modalElement);
+        // Create a CartItem object
+        const cartItem = {
+          id: productId,
+          image: productImage,
+          name: productName,
+          price: productPrice,
+          quantity,
+        };
 
-      article.addEventListener("click", () => {
-        modal.hide();
+        // Add the product to the shopping cart and update the cart icon
+        addToCart(cartItem, quantity);
+        subscribeToShoppingCartChange(() => {
+          const addingToCart = isAddingToCart.get();
+          isAddingToCart.set(!addingToCart);
+          input.value = "1";
+        });
       });
-    }
+    });
   });
 </script>
