@@ -1,4 +1,13 @@
-export const CartEmpty = () => {
+import type { FunctionalComponent } from "preact";
+import { Button } from "./Button";
+
+interface CartEmptyProps {
+  closeDrawer: () => void;
+}
+
+export const CartEmpty: FunctionalComponent<CartEmptyProps> = ({
+  closeDrawer,
+}) => {
   return (
     <section class="flex flex-col w-full items-center space-y-7 pt-16 text-center px-8">
       <svg
@@ -68,14 +77,9 @@ export const CartEmpty = () => {
         </p>
       </div>
 
-      <a href="/">
-        <button
-          type="button"
-          class="inline-flex text-white text-base font-medium items-center bg-neutral-900 justify-center gap-1 border border-slate-200 rounded-full py-3 px-6 disabled:opacity-50 disabled:cursor-not-allowed w-fit"
-        >
-          Place your order
-        </button>
-      </a>
+      <Button fullWidth onClick={closeDrawer}>
+        Place your order
+      </Button>
     </section>
   );
 };
