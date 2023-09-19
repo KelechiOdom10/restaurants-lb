@@ -1,10 +1,5 @@
 ---
-import {
-  ProductList,
-  Navbar,
-  CategoriesFilter,
-  CartDrawer,
-} from "@restaurants-lb/ui";
+import { ProductList, Navbar, CategoriesFilter } from "@restaurants-lb/ui";
 
 import Layout from "../layouts/Layout.astro";
 ---
@@ -31,6 +26,7 @@ import Layout from "../layouts/Layout.astro";
       ]}
     />
     <ProductList
+      client:load
       products={[
         {
           id: "1",
@@ -134,6 +130,5 @@ import Layout from "../layouts/Layout.astro";
         },
       ]}
     />
-    <CartDrawer client:visible />
   </main>
 </Layout>
