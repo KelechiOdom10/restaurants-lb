@@ -13,10 +13,13 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "jsxImportSource": "preact",
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "react": ["./node_modules/preact/compat/"],
-      "react-dom": ["./node_modules/preact/compat/"],
+      "react": ["./node_modules/preact/compat/*"],
+      "react-dom": ["./node_modules/preact/compat/*"],
+      "@astrojs/preact": ["./node_modules/@astrojs/preact/dist/index.js"],
       "@restaurants-lb/ui": ["libs/ui/index.ts"]
     }
   },
