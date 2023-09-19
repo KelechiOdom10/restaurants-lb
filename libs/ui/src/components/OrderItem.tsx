@@ -1,3 +1,4 @@
+import { useState } from "preact/hooks";
 import type { CartItem } from "../stores";
 import { NumberInput } from "./NumberInput";
 
@@ -12,6 +13,13 @@ export const OrderItem = ({
   handleRemoveItem,
   handleUpdateQuantity,
 }: OrderItemProps) => {
+  const [quantity, setQuantity] = useState(item.quantity);
+
+  const handleInputButtonClick = (newQuantity: number) => {
+    setQuantity(newQuantity);
+    handleUpdateQuantity(newQuantity);
+  };
+
   return (
     <article class="flex w-full max-w-sm flex-col space-y-4 overflow-hidden bg-white">
       <div class="flex items-stretch space-x-4">
@@ -88,10 +96,9 @@ export const OrderItem = ({
           </svg>
         </button>
         <NumberInput
-          defaultValue={item.quantity}
+          value={quantity}
           className="w-40"
-          onClickAdd={handleUpdateQuantity}
-          onClickSubtract={handleUpdateQuantity}
+          onValueChange={handleInputButtonClick}
         />
       </div>
     </article>
