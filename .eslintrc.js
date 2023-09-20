@@ -32,7 +32,7 @@ module.exports = {
       },
     },
     {
-      files: ["*.ts", "*.tsx", "*.js", "*.jsx", "!*.stories.tsx"],
+      files: ["*.ts", "*.tsx", "*.js", "*.jsx"],
       extends: ["plugin:@typescript-eslint/recommended", "preact"],
       plugins: ["unused-imports", "import"],
       parser: "@typescript-eslint/parser",
