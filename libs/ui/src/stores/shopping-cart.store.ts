@@ -1,84 +1,89 @@
 import { persistentAtom } from "@nanostores/persistent";
 import { atom, computed } from "nanostores";
 
-export interface CartItem {
+type Product = {
   id: string;
   name: string;
+  description: string;
   image: string;
   price: number;
-  quantity: number;
-}
+};
 
+export type CartItem = Product &
+  Omit<Product, "description"> & {
+    quantity: number;
+  };
+
+// Create a writableAtom for the shoppingCart
 export const shoppingCart = persistentAtom<Array<CartItem>>("cart", [], {
   encode: JSON.stringify,
   decode: JSON.parse,
 });
 
-export const isAddingToCart = atom(false);
+export const isUpdatingCart = atom(false);
 
+// Get the current cart state
 export const cart = shoppingCart.get();
+
+// Calculate the total quantity of items in the cart
 export const totalQuantity = computed(shoppingCart, (cart) =>
   cart.reduce((acc, item) => acc + item.quantity, 0)
 );
 
-const increaseQuantity = (id: string, quantity = 1) => {
-  const localCart = shoppingCart.get();
-  const index = localCart.findIndex((i) => i.id === id);
-  if (index !== -1) {
-    localCart[index].quantity += quantity;
-  }
-  shoppingCart.set(localCart);
+// Increase the quantity of a cart item
+export const increaseQuantity = (id: string, quantity = 1) => {
+  const cart = shoppingCart.get();
+  const updatedCart = cart.map((item) => {
+    if (item.id === id) {
+      item.quantity += quantity;
+    }
+    return item;
+  });
+  shoppingCart.set(updatedCart);
 };
 
+// Remove an item from the cart by ID
 export const removeItemFromCart = (id: string) => {
-  const localCart = shoppingCart.get();
-  const index = localCart.findIndex((i) => i.id === id);
-  if (index !== -1) {
-    localCart.splice(index, 1);
-  }
-  shoppingCart.set(localCart);
+  const cart = shoppingCart.get();
+  const updatedCart = cart.filter((item) => item.id !== id);
+  shoppingCart.set(updatedCart);
 };
 
-export const addToCart = (item: CartItem, quantity = 1) => {
-  const localCart = shoppingCart.get();
-  const index = localCart.findIndex((i) => i.id === item.id);
-  if (index !== -1) {
+// Add a product to the cart with a specified quantity
+export const addToCart = (item: Product, quantity = 1) => {
+  const cart = shoppingCart.get();
+  const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+  if (existingItem) {
     increaseQuantity(item.id, quantity);
-    return;
+  } else {
+    const newItem = { ...item, quantity };
+    shoppingCart.set([...cart, newItem]);
   }
-
-  localCart.push({ ...item, quantity });
-  shoppingCart.set(localCart);
 };
 
+// Update the quantity of a cart item
 export const updateCartItem = (id: string, quantity: number) => {
-  if (Number(quantity) === 0) {
-    removeItemFromCart(id);
-    return;
-  }
-
-  const localCart = shoppingCart.get();
-  const index = localCart.findIndex((i) => i.id === id);
-  if (index !== -1) {
-    localCart[index].quantity = quantity;
-  }
-  shoppingCart.set(localCart);
+  const cart = shoppingCart.get();
+  const updatedCart = cart.map((item) => {
+    if (item.id === id) {
+      item.quantity = quantity;
+    }
+    return item;
+  });
+  shoppingCart.set(updatedCart);
 };
 
+// Clear the entire cart
 export const clearCart = () => {
   shoppingCart.set([]);
 };
 
+// Subscribe to changes in the shopping cart
 export const subscribeToShoppingCartChange = (
   fn?: (val: readonly CartItem[]) => void
 ) => {
   shoppingCart.subscribe((val) => {
     fn?.(val);
-    // update cart icon total
-    const cartIconTotal = document.querySelector(
-      "#cart-icon-total"
-    ) as HTMLElement;
-    const totalItems = val.reduce((acc, item) => acc + item.quantity, 0);
-    cartIconTotal.innerHTML = totalItems.toString();
+    isUpdatingCart.set(!isUpdatingCart.get());
   });
 };

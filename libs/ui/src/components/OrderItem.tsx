@@ -1,4 +1,7 @@
+import { useState } from "preact/hooks";
+
 import type { CartItem } from "../stores";
+
 import { NumberInput } from "./NumberInput";
 
 interface OrderItemProps {
@@ -12,6 +15,13 @@ export const OrderItem = ({
   handleRemoveItem,
   handleUpdateQuantity,
 }: OrderItemProps) => {
+  const [quantity, setQuantity] = useState(item.quantity);
+
+  const handleInputButtonClick = (newQuantity: number) => {
+    setQuantity(newQuantity);
+    handleUpdateQuantity(newQuantity);
+  };
+
   return (
     <article class="flex w-full max-w-sm flex-col space-y-4 overflow-hidden bg-white">
       <div class="flex items-stretch space-x-4">
@@ -50,7 +60,7 @@ export const OrderItem = ({
                   stroke-width="1.2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                ></path>
+                />
                 <path
                   id="Vector_2"
                   d="M5.66666 3.31334L5.81332 2.44001C5.91999 1.80668 5.99999 1.33334 7.12666 1.33334H8.87332C9.99999 1.33334 10.0867 1.83334 10.1867 2.44668L10.3333 3.31334"
@@ -58,7 +68,7 @@ export const OrderItem = ({
                   stroke-width="1.2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                ></path>
+                />
                 <path
                   id="Vector_3"
                   d="M12.5667 6.09334L12.1333 12.8067C12.06 13.8533 12 14.6667 10.14 14.6667H5.86C4 14.6667 3.94 13.8533 3.86667 12.8067L3.43333 6.09334"
@@ -66,7 +76,7 @@ export const OrderItem = ({
                   stroke-width="1.2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                ></path>
+                />
                 <path
                   id="Vector_4"
                   d="M6.88667 11H9.10667"
@@ -74,7 +84,7 @@ export const OrderItem = ({
                   stroke-width="1.2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                ></path>
+                />
                 <path
                   id="Vector_5"
                   d="M6.33334 8.33334H9.66668"
@@ -82,16 +92,15 @@ export const OrderItem = ({
                   stroke-width="1.2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                ></path>
+                />
               </g>
             </g>
           </svg>
         </button>
         <NumberInput
-          defaultValue={item.quantity}
+          value={quantity}
           className="w-40"
-          onClickAdd={handleUpdateQuantity}
-          onClickSubtract={handleUpdateQuantity}
+          onValueChange={handleInputButtonClick}
         />
       </div>
     </article>

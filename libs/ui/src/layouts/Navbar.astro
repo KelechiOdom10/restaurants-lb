@@ -1,5 +1,5 @@
 ---
-import { CartIcon, SearchInput } from "../components";
+import { CartButton, SearchInput } from "../components";
 ---
 
 <header class="sticky inset-x-0 top-0 bg-white px-8 py-4 shadow-none md:shadow">
@@ -17,6 +17,6 @@ import { CartIcon, SearchInput } from "../components";
     />
 
     <!-- cart icon -->
-    <CartIcon />
+    <CartButton client:load />
   </nav>
 </header>
