@@ -1,4 +1,3 @@
-// @ts-nocheck
 export { default as Pill } from "./Pill.astro";
 export { default as SearchInput } from "./SearchInput.astro";
 export { default as CategoriesFilter } from "./CategoryFilter.astro";

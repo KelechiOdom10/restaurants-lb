@@ -1,6 +1,6 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["plugin:astro/recommended", "plugin:tailwindcss/recommended"],
+  extends: ["plugin:tailwindcss/recommended", "plugin:astro/recommended"],
   plugins: ["unused-imports", "jsx-a11y", "prettier"],
   parserOptions: {
     ecmaVersion: "latest",
@@ -33,7 +33,7 @@ module.exports = {
     },
     {
       files: ["*.ts", "*.tsx", "*.js", "*.jsx", "!*.stories.tsx"],
-      extends: ["plugin:@typescript-eslint/recommended"],
+      extends: ["plugin:@typescript-eslint/recommended", "preact"],
       plugins: ["unused-imports", "import"],
       parser: "@typescript-eslint/parser",
       rules: {
@@ -88,4 +88,9 @@ module.exports = {
       parser: "@typescript-eslint/parser",
     },
   ],
+  settings: {
+    jest: {
+      version: "latest",
+    },
+  },
 };

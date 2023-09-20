@@ -37,7 +37,7 @@ export const NumberInput: FunctionalComponent<NumberInputProps> = ({
         </button>
         <input
           type="number"
-          className="cursor-default flex w-full justify-center border-none bg-transparent text-center text-base font-medium leading-normal text-gray-800 outline-none focus:text-black focus:outline-none"
+          className="flex w-full cursor-default justify-center border-none bg-transparent text-center text-base font-medium leading-normal text-gray-800 outline-none focus:text-black focus:outline-none"
           name="product-quantity-input"
           value={value}
           min="1"

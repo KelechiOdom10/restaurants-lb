@@ -1,9 +1,11 @@
+import { Dialog } from "@headlessui/react";
 import type { FunctionalComponent } from "preact";
+import { useState } from "preact/hooks";
+
+import { addToCart, subscribeToShoppingCartChange } from "../stores";
+
 import { Button } from "./Button";
 import { NumberInput } from "./NumberInput";
-import { Dialog } from "@headlessui/react";
-import { addToCart, subscribeToShoppingCartChange } from "../stores";
-import { useState } from "preact/hooks";
 
 type Product = {
   id: string;
@@ -43,7 +45,7 @@ const ProductModal: FunctionalComponent<ProductModalProps> = ({
       as="div"
       open={isOpen}
       onClose={closeModal}
-      className="fixed bottom-0 md:inset-0 z-30 overflow-y-auto flex justify-center items-center"
+      className="fixed bottom-0 z-30 flex items-center justify-center overflow-y-auto md:inset-0"
     >
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
       {/* Modal content */}
@@ -71,7 +73,7 @@ const ProductModal: FunctionalComponent<ProductModalProps> = ({
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                ></path>
+                />
               </g>
             </svg>
             <span className="sr-only">Close modal</span>

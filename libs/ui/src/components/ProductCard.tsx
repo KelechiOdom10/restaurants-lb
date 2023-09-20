@@ -1,5 +1,6 @@
-import { useState } from "preact/hooks";
 import type { FunctionComponent } from "preact";
+import { useState } from "preact/hooks";
+
 import ProductModal from "./ProductModal";
 
 type ProductCardProps = {
@@ -24,7 +25,7 @@ export const ProductCard: FunctionComponent<ProductCardProps> = ({
 
   return (
     <article
-      className="product-card mx-auto flex w-full max-w-xs flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:cursor-pointer"
+      className="mx-auto flex w-full max-w-xs flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:cursor-pointer"
       onClick={openModal}
     >
       <img

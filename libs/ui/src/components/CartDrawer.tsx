@@ -1,16 +1,18 @@
+import { Dialog } from "@headlessui/react";
 import { useStore } from "@nanostores/preact";
+import type { FunctionalComponent } from "preact";
+import { useEffect, useState } from "preact/hooks";
+
 import {
   removeItemFromCart,
   shoppingCart,
   subscribeToShoppingCartChange,
   updateCartItem,
 } from "../stores";
-import { OrderItem } from "./OrderItem";
-import { useEffect, useState } from "preact/hooks";
-import { CartEmpty } from "./CartEmpty";
-import type { FunctionalComponent } from "preact";
-import { Dialog } from "@headlessui/react";
+
 import { Button } from "./Button";
+import { CartEmpty } from "./CartEmpty";
+import { OrderItem } from "./OrderItem";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -28,6 +30,7 @@ export const CartDrawer: FunctionalComponent<CartDrawerProps> = ({
     subscribeToShoppingCartChange((val) => {
       setCartItems([...val]);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shoppingCart]);
 
   const handleRemoveItem = (id: string) => {
@@ -55,11 +58,11 @@ export const CartDrawer: FunctionalComponent<CartDrawerProps> = ({
       as="div"
       open={isOpen}
       onClose={closeDrawer}
-      className="z-30 fixed inset-y-0 left-auto right-0"
+      className="fixed inset-y-0 left-auto right-0 z-30"
     >
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
-      <Dialog.Panel className="relative h-screen w-screen xs:w-[384px] bg-white">
+      <Dialog.Panel className="relative h-screen w-screen bg-white xs:w-[384px]">
         {/* <!-- Drawer Header --> */}
         <header class="sticky inset-0 flex items-center space-x-28 border-b p-4 shadow md:space-x-[120px]">
           <button
@@ -83,7 +86,7 @@ export const CartDrawer: FunctionalComponent<CartDrawerProps> = ({
                   stroke-width="1.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                ></path>
+                />
               </g>
             </svg>
             <span class="sr-only">Close modal</span>
