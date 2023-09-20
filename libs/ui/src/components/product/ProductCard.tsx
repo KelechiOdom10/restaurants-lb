@@ -1,17 +1,11 @@
 import type { FunctionComponent } from "preact";
 import { useState } from "preact/hooks";
 
-import ProductModal from "./ProductModal";
+import type { Product } from "../../stores";
+import ProductModal from "../product/ProductModal";
 
 type ProductCardProps = {
-  product: {
-    id: string;
-    name: string;
-    category: string;
-    description: string;
-    price: number;
-    image: string;
-  };
+  product: Product;
 };
 
 export const ProductCard: FunctionComponent<ProductCardProps> = ({

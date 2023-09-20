@@ -2,19 +2,13 @@ import { Dialog } from "@headlessui/react";
 import type { FunctionalComponent } from "preact";
 import { useState } from "preact/hooks";
 
-import { addToCart, subscribeToShoppingCartChange } from "../stores";
-
-import { Button } from "./Button";
-import { NumberInput } from "./NumberInput";
-
-type Product = {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  price: number;
-  image: string;
-};
+import {
+  Product,
+  addToCart,
+  subscribeToShoppingCartChange,
+} from "../../stores";
+import { Button } from "../common/Button";
+import { NumberInput } from "../common/NumberInput";
 
 type ProductModalProps = {
   product: Product;

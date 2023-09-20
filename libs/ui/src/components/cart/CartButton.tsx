@@ -2,7 +2,7 @@ import { useStore } from "@nanostores/preact";
 import type { FunctionalComponent } from "preact";
 import { useMemo, useState } from "preact/hooks";
 
-import { isUpdatingCart, shoppingCart } from "../stores";
+import { isUpdatingCart, shoppingCart } from "../../stores";
 
 import { CartDrawer } from "./CartDrawer";
 

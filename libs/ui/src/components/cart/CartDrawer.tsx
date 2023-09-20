@@ -8,9 +8,9 @@ import {
   shoppingCart,
   subscribeToShoppingCartChange,
   updateCartItem,
-} from "../stores";
+} from "../../stores";
+import { Button } from "../common/Button";
 
-import { Button } from "./Button";
 import { CartEmpty } from "./CartEmpty";
 import { OrderItem } from "./OrderItem";
 

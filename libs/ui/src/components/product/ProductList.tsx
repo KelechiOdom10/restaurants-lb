@@ -1,16 +1,11 @@
 import type { FunctionalComponent } from "preact";
 
+import type { Product } from "../../stores";
+
 import { ProductCard } from "./ProductCard";
 
 interface Props {
-  products: Array<{
-    id: string;
-    name: string;
-    category: string;
-    description: string;
-    price: number;
-    image: string;
-  }>;
+  products: Array<Product>;
 }
 
 export const ProductList: FunctionalComponent<Props> = ({ products }) => (

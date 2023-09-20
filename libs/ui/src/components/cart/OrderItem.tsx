@@ -1,8 +1,7 @@
 import { useState } from "preact/hooks";
 
-import type { CartItem } from "../stores";
-
-import { NumberInput } from "./NumberInput";
+import type { CartItem } from "../../stores";
+import { NumberInput } from "../common/NumberInput";
 
 interface OrderItemProps {
   item: CartItem;

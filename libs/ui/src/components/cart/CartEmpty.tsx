@@ -1,6 +1,6 @@
 import type { FunctionalComponent } from "preact";
 
-import { Button } from "./Button";
+import { Button } from "../common/Button";
 
 interface CartEmptyProps {
   closeDrawer: () => void;
