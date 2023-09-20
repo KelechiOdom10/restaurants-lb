@@ -1,9 +1,10 @@
 import { persistentAtom } from "@nanostores/persistent";
 import { atom, computed } from "nanostores";
 
-type Product = {
-  id: string;
+export type Product = {
+  id: number;
   name: string;
+  category: string;
   description: string;
   image: string;
   price: number;
@@ -31,7 +32,7 @@ export const totalQuantity = computed(shoppingCart, (cart) =>
 );
 
 // Increase the quantity of a cart item
-export const increaseQuantity = (id: string, quantity = 1) => {
+export const increaseQuantity = (id: number, quantity = 1) => {
   const cart = shoppingCart.get();
   const updatedCart = cart.map((item) => {
     if (item.id === id) {
@@ -43,7 +44,7 @@ export const increaseQuantity = (id: string, quantity = 1) => {
 };
 
 // Remove an item from the cart by ID
-export const removeItemFromCart = (id: string) => {
+export const removeItemFromCart = (id: number) => {
   const cart = shoppingCart.get();
   const updatedCart = cart.filter((item) => item.id !== id);
   shoppingCart.set(updatedCart);
@@ -62,7 +63,7 @@ export const addToCart = (item: Product, quantity = 1) => {
 };
 
 // Update the quantity of a cart item
-export const updateCartItem = (id: string, quantity: number) => {
+export const updateCartItem = (id: number, quantity: number) => {
   const cart = shoppingCart.get();
   const updatedCart = cart.map((item) => {
     if (item.id === id) {
