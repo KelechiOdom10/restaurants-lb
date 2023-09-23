@@ -1,9 +1,9 @@
 import { persistentAtom } from "@nanostores/persistent";
-import { atom, computed } from "nanostores";
+import { computed } from "nanostores";
 
 export type Product = {
   id: number;
-  name: string;
+  title: string;
   category: string;
   description: string;
   image: string;
@@ -21,14 +21,17 @@ export const shoppingCart = persistentAtom<Array<CartItem>>("cart", [], {
   decode: JSON.parse,
 });
 
-export const isUpdatingCart = atom(false);
-
 // Get the current cart state
-export const cart = shoppingCart.get();
+export const cart = computed(shoppingCart, (cart) => cart);
 
 // Calculate the total quantity of items in the cart
 export const totalQuantity = computed(shoppingCart, (cart) =>
   cart.reduce((acc, item) => acc + item.quantity, 0)
+);
+
+// Calculate the total amount of the cart
+export const totalAmount = computed(shoppingCart, (cart) =>
+  cart.reduce((acc, item) => acc + item.quantity * item.price, 0)
 );
 
 // Increase the quantity of a cart item
@@ -77,14 +80,4 @@ export const updateCartItem = (id: number, quantity: number) => {
 // Clear the entire cart
 export const clearCart = () => {
   shoppingCart.set([]);
-};
-
-// Subscribe to changes in the shopping cart
-export const subscribeToShoppingCartChange = (
-  fn?: (val: readonly CartItem[]) => void
-) => {
-  shoppingCart.subscribe((val) => {
-    fn?.(val);
-    isUpdatingCart.set(!isUpdatingCart.get());
-  });
 };
