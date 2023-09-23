@@ -27,10 +27,10 @@ export const OrderItem = ({
         <img
           class="h-16 w-24 rounded-xl object-cover"
           src={item.image}
-          alt={item.name}
+          alt={item.title}
         />
         <div class="flex flex-col items-start space-y-4">
-          <p class="text-sm text-gray-600">{item.name}</p>
+          <p class="text-sm text-gray-600">{item.title}</p>
           <p class="text-base font-medium text-gray-800">
             ₦{item.price.toLocaleString()}
           </p>
