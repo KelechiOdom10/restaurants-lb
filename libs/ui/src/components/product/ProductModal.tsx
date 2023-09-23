@@ -2,11 +2,7 @@ import { Dialog } from "@headlessui/react";
 import type { FunctionalComponent } from "preact";
 import { useState } from "preact/hooks";
 
-import {
-  Product,
-  addToCart,
-  subscribeToShoppingCartChange,
-} from "../../stores";
+import { Product, addToCart } from "../../stores";
 import { Button } from "../common/Button";
 import { NumberInput } from "../common/NumberInput";
 
@@ -25,7 +21,6 @@ const ProductModal: FunctionalComponent<ProductModalProps> = ({
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
-    subscribeToShoppingCartChange();
     setQuantity(1);
     closeModal();
   };
@@ -79,12 +74,15 @@ const ProductModal: FunctionalComponent<ProductModalProps> = ({
           <img
             className="max-h-48 w-full object-cover xs:max-h-60 xs:min-h-[200px]"
             src={product.image}
-            alt={product.name}
+            alt={product.title}
           />
           <div className="flex items-start justify-between p-4">
             <div className="flex flex-col space-y-2 text-base leading-normal text-gray-800">
-              <Dialog.Title as="p" className="font-normal">
-                {product.name}
+              <Dialog.Title
+                as="p"
+                className="line-clamp-2 max-w-[200px] font-normal"
+              >
+                {product.title}
               </Dialog.Title>
               <p className="text-sm text-slate-500">{product.category}</p>
             </div>
