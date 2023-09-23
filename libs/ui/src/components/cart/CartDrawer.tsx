@@ -1,12 +1,11 @@
 import { Dialog } from "@headlessui/react";
 import { useStore } from "@nanostores/preact";
 import type { FunctionalComponent } from "preact";
-import { useEffect, useState } from "preact/hooks";
 
 import {
   removeItemFromCart,
-  shoppingCart,
-  subscribeToShoppingCartChange,
+  cart as shoppingCart,
+  totalAmount,
   updateCartItem,
 } from "../../stores";
 import { Button } from "../common/Button";
@@ -24,34 +23,7 @@ export const CartDrawer: FunctionalComponent<CartDrawerProps> = ({
   closeDrawer,
 }) => {
   const cart = useStore(shoppingCart);
-  const [cartItems, setCartItems] = useState(cart);
-
-  useEffect(() => {
-    subscribeToShoppingCartChange((val) => {
-      setCartItems([...val]);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shoppingCart]);
-
-  const handleRemoveItem = (id: string) => {
-    removeItemFromCart(id);
-    subscribeToShoppingCartChange((val) => {
-      setCartItems([...val]);
-    });
-  };
-
-  const handleUpdateQuantity = (id: string, value: number) => {
-    updateCartItem(id, value);
-    subscribeToShoppingCartChange((val) => {
-      setCartItems([...val]);
-    });
-  };
-
-  const subTotal = cartItems
-    .reduce((acc, item) => {
-      return acc + item.price * item.quantity;
-    }, 0)
-    .toLocaleString();
+  const subTotal = useStore(totalAmount).toLocaleString();
 
   return (
     <Dialog
@@ -96,17 +68,17 @@ export const CartDrawer: FunctionalComponent<CartDrawerProps> = ({
           </Dialog.Title>
         </header>
 
-        {cartItems.length > 0 ? (
+        {cart.length > 0 ? (
           <>
             {/* <!-- Drawer Body --> */}
             <div class="flex max-h-[80vh] w-full flex-col divide-y overflow-y-scroll pb-44">
-              {cartItems.map((item) => (
+              {cart.map((item) => (
                 <div key={item.id} class="px-5 pb-4 pt-6">
                   <OrderItem
                     item={item}
-                    handleRemoveItem={() => handleRemoveItem(item.id)}
+                    handleRemoveItem={() => removeItemFromCart(item.id)}
                     handleUpdateQuantity={(quantity) =>
-                      handleUpdateQuantity(item.id, quantity)
+                      updateCartItem(item.id, quantity)
                     }
                   />
                 </div>

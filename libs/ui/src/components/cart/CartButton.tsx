@@ -1,23 +1,14 @@
 import { useStore } from "@nanostores/preact";
 import type { FunctionalComponent } from "preact";
-import { useMemo, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 
-import { isUpdatingCart, shoppingCart } from "../../stores";
+import { totalQuantity } from "../../stores";
 
 import { CartDrawer } from "./CartDrawer";
 
 export const CartButton: FunctionalComponent = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const cart = useStore(shoppingCart);
-  const updatingCart = useStore(isUpdatingCart);
-  const totalItems = useMemo(
-    () =>
-      cart.reduce((acc, item) => {
-        return acc + item.quantity;
-      }, 0),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [cart, updatingCart]
-  );
+  const totalItems = useStore(totalQuantity);
 
   const openDrawer = () => {
     setIsDrawerOpen(true);

@@ -40,6 +40,7 @@ const { placeholder = "Search for meal...", className } = Astro.props;
     </svg>
   </div>
   <input
+    id="products-search-input"
     type="text"
     class:list={[
       "block w-full rounded-full border border-slate-200 bg-gray-50 p-2.5 pl-10 text-gray-600 text-sm font-normal  shadow focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50",
@@ -47,3 +48,36 @@ const { placeholder = "Search for meal...", className } = Astro.props;
     placeholder={placeholder}
   />
 </div>
+
+<script>
+  let debounceTimeout: number | undefined;
+
+  const input = document.getElementById(
+    "products-search-input"
+  ) as HTMLInputElement;
+  input.addEventListener("input", (e: Event) => {
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    // Debounce the search input for 1 second to avoid spamming the URL with search queries
+    // @ts-expect-error - TS doesn't know about NodeJS's setTimeout
+    debounceTimeout = setTimeout(() => {
+      if (e.target instanceof HTMLInputElement) {
+        const searchQuery = e.target?.value;
+        const url = new URL(window.location.href);
+
+        if (searchQuery === "") {
+          // Clear the "search" query parameter from the URL
+          url.searchParams.delete("search");
+        } else {
+          // Update the "search" query parameter
+          url.searchParams.set("search", searchQuery);
+        }
+
+        window.history.pushState({}, "", url.toString());
+        window.dispatchEvent(new Event("popstate"));
+      }
+    }, 1000);
+  });
+</script>

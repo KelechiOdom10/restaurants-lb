@@ -23,13 +23,15 @@ export const ProductCard: FunctionComponent<ProductCardProps> = ({
       onClick={openModal}
     >
       <img
-        className="max-h-36 object-cover"
+        className="max-h-36 object-cover object-top"
         src={product.image}
-        alt={product.name}
+        alt={product.title}
       />
       <div className="flex items-start justify-between p-4">
         <div className="flex flex-col space-y-2">
-          <p className="text-sm font-normal text-gray-800">{product.name}</p>
+          <p className="line-clamp-2 max-w-[200px] text-sm font-normal text-gray-800">
+            {product.title}
+          </p>
           <p className="text-xs font-normal text-slate-500">
             {product.category}
           </p>

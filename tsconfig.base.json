@@ -19,7 +19,6 @@
     "paths": {
       "react": ["./node_modules/preact/compat/*"],
       "react-dom": ["./node_modules/preact/compat/*"],
-      "@astrojs/preact": ["./node_modules/@astrojs/preact/dist/index.js"],
       "@restaurants-lb/ui": ["libs/ui/index.ts"]
     }
   },
