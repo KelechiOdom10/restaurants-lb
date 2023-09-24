@@ -1,7 +1,9 @@
 ---
 import { Seo } from "@restaurants-lb/ui";
 
-const { origin, pathname } = Astro.url;
+const { pathname } = Astro.url;
+
+const URL = "https://city-subs.vercel.app";
 ---
 
 <!doctype html>
@@ -12,9 +14,9 @@ const { origin, pathname } = Astro.url;
         title: "City Subs",
         description:
           "City Subs - Bringing the best subs, burgers and desserts to Lagos",
-        image: `${origin}/images/logo.png`,
-        feed: `${origin}/`,
-        ogUrl: `${origin}${pathname}`,
+        image: `${URL}/images/logo.png`,
+        feed: `${URL}/`,
+        ogUrl: `${URL}${pathname}`,
         author: {
           name: "City Subs",
         },
