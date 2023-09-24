@@ -1,25 +1,29 @@
 ---
-interface Props {
-  title: string;
-}
+import { Seo } from "@restaurants-lb/ui";
 
-const { title } = Astro.props;
+const { origin, pathname } = Astro.url;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <Seo
+      meta={{
+        title: "City Subs",
+        description:
+          "City Subs - Bringing the best subs, burgers and desserts to Lagos",
+        image: `${origin}/images/logo.png`,
+        feed: `${origin}/`,
+        ogUrl: `${origin}${pathname}`,
+        author: {
+          name: "City Subs",
+        },
+      }}
+    />
   </head>
 
   <body>
     <slot />
+    <style is:global></style>
   </body>
 </html>
-
-<style is:global></style>
