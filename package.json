@@ -44,8 +44,10 @@
     "prettier-plugin-tailwindcss": "^0.5.4",
     "typescript": "~5.2.2"
   },
-  "resolutions": {
-    "react": "npm:@preact/compat@latest",
-    "react-dom": "npm:@preact/compat@latest"
+  "pnpm": {
+    "overrides": {
+      "react": "npm:@preact/compat@latest",
+      "react-dom": "npm:@preact/compat@latest"
+    }
   }
 }
